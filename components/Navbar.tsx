@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import BrandLogo from "@/components/BrandLogo";
 import { getStoreUrl } from "@/lib/platform";
 
@@ -26,17 +27,17 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-7xl mx-auto flex h-16 items-center justify-between px-5 lg:px-8">
-        <a href="/" className="group">
+        <Link href="/" className="group">
           <BrandLogo size="sm" wordmarkClassName="text-lg sm:text-xl" />
-        </a>
+        </Link>
 
         <div className="flex items-center gap-4">
-          <a
+          <Link
             href="/reading-speed-test"
             className="hidden md:block text-sm text-muted hover:text-foreground transition-colors"
           >
             Speed Test
-          </a>
+          </Link>
           <a
             href={getStoreUrl("ios", "nav_cta")}
             target="_blank"
