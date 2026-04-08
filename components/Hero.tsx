@@ -95,7 +95,7 @@ function PhoneMockup() {
         <div className="absolute inset-[4px] rounded-[2.7rem] bg-bg flex flex-col items-center justify-center overflow-hidden">
           <div className="absolute top-10 flex flex-col items-center gap-2">
             <Image
-              src={withBasePath("/readfast-logo.jpg?v=2")}
+              src={withBasePath("/readfast-logo.jpg")}
               alt=""
               width={28}
               height={28}
