@@ -153,7 +153,7 @@ export default function ReadingSpeedTest() {
   const BAR_MAX = 700;
 
   return (
-    <section className="min-h-screen bg-bg pt-24 pb-20">
+    <section className="min-h-screen bg-bg pt-20 pb-12 lg:pt-24 lg:pb-20">
       <div className="max-w-2xl mx-auto px-5 lg:px-8">
         <AnimatePresence mode="wait">
 
@@ -166,21 +166,20 @@ export default function ReadingSpeedTest() {
               exit={{ opacity: 0, y: -16 }}
               transition={{ duration: 0.4 }}
             >
-              <div className="text-center mb-12">
+              <div className="text-center mb-8 lg:mb-12">
                 <p className="text-xs tracking-[0.25em] uppercase text-accent font-mono mb-4">
                   Free Tool
                 </p>
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold leading-[1.08] tracking-tight mb-5">
+                <h1 className="text-3xl sm:text-5xl lg:text-6xl font-display font-bold leading-[1.08] tracking-tight whitespace-nowrap mb-4 lg:mb-5">
                   Reading Speed Test
                 </h1>
-                <p className="text-lg text-muted leading-relaxed max-w-md mx-auto">
-                  Find out exactly how fast you read — in words per minute — plus
-                  a quick comprehension check. Takes under 2 minutes.
+                <p className="text-base sm:text-lg text-muted leading-relaxed max-w-2xl mx-auto whitespace-nowrap">
+                  Check your reading speed and comprehension in under 2 minutes.
                 </p>
               </div>
 
               {/* Stats */}
-              <div className="grid grid-cols-3 gap-3 mb-8">
+              <div className="grid grid-cols-3 gap-3 mb-7 lg:mb-8">
                 {[
                   { value: `${WORD_COUNT}`, unit: "words" },
                   { value: "~1–2", unit: "minutes" },
@@ -188,7 +187,7 @@ export default function ReadingSpeedTest() {
                 ].map((s) => (
                   <div
                     key={s.unit}
-                    className="p-4 rounded-2xl bg-surface border border-border text-center"
+                    className="p-3 sm:p-4 rounded-2xl bg-surface border border-border text-center"
                   >
                     <p className="text-2xl font-display font-bold">{s.value}</p>
                     <p className="text-[11px] text-muted font-mono uppercase tracking-wider mt-0.5">
@@ -199,7 +198,7 @@ export default function ReadingSpeedTest() {
               </div>
 
               {/* How it works */}
-              <div className="p-6 rounded-2xl bg-surface border border-border mb-10">
+              <div className="p-5 sm:p-6 rounded-2xl bg-surface border border-border mb-8 lg:mb-10">
                 <p className="text-[11px] text-muted font-mono uppercase tracking-wider mb-4">
                   How it works
                 </p>
@@ -271,7 +270,7 @@ export default function ReadingSpeedTest() {
               </div>
 
               {/* Passage */}
-              <article className="p-8 rounded-2xl bg-surface border border-border mb-8">
+              <article className="p-6 sm:p-8 rounded-2xl bg-surface border border-border mb-7 lg:mb-8 max-h-[62vh] overflow-auto">
                 <p className="text-[11px] text-muted font-mono uppercase tracking-wider mb-5">
                   Reading passage · {WORD_COUNT} words
                 </p>

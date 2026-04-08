@@ -26,7 +26,7 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-7xl mx-auto flex h-16 items-center justify-between px-5 lg:px-8">
-        <a href="#" className="group">
+        <a href="/" className="group">
           <BrandLogo size="sm" wordmarkClassName="text-lg sm:text-xl" />
         </a>
 
