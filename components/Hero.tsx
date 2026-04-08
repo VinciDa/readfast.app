@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import BrandLogo from "@/components/BrandLogo";
 import StoreButtons from "./StoreButtons";
+import { withBasePath } from "@/lib/base-path";
 import { getORPIndex } from "@/lib/platform";
 
 /** One word per RSVP frame — full loop, then pause */
@@ -94,7 +95,7 @@ function PhoneMockup() {
         <div className="absolute inset-[4px] rounded-[2.7rem] bg-bg flex flex-col items-center justify-center overflow-hidden">
           <div className="absolute top-10 flex flex-col items-center gap-2">
             <Image
-              src="/readfast-logo.jpg"
+              src={withBasePath("/readfast-logo.jpg?v=2")}
               alt=""
               width={28}
               height={28}

@@ -1,6 +1,7 @@
 import Image from "next/image";
+import { withBasePath } from "@/lib/base-path";
 
-const LOGO = "/readfast-logo.jpg";
+const LOGO = withBasePath("/readfast-logo.jpg?v=2");
 
 const sizesPx = { sm: 32, md: 40, lg: 64, xl: 80 } as const;
 

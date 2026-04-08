@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Syne, DM_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import { withBasePath } from "@/lib/base-path";
 
 const syne = Syne({
   variable: "--font-syne",
@@ -26,8 +27,8 @@ export const metadata: Metadata = {
     "Improve your reading speed from 200 to 600+ WPM. ReadFast replaces skimming with RSVP technology — boosting reading comprehension so you get through books, PDFs, and articles 3× faster. Free reading app for iOS & Android.",
   metadataBase: new URL("https://readfast.app"),
   icons: {
-    icon: "/readfast-logo.jpg",
-    apple: "/readfast-logo.jpg",
+    icon: withBasePath("/readfast-logo.jpg?v=2"),
+    apple: withBasePath("/readfast-logo.jpg?v=2"),
   },
   keywords: [
     "speed reading",
@@ -53,7 +54,7 @@ export const metadata: Metadata = {
     siteName: "ReadFast",
     images: [
       {
-        url: "/og-image.png",
+        url: withBasePath("/og-image.png"),
         width: 1200,
         height: 630,
         alt: "ReadFast — Speed Reading App to Boost Reading Speed and Comprehension",
@@ -67,7 +68,7 @@ export const metadata: Metadata = {
     title: "ReadFast — Speed Reading App | Test & Improve Your Reading Speed",
     description:
       "Ditch skimming. Boost your reading speed and comprehension with RSVP technology, focus tools, and unlimited PDF imports.",
-    images: ["/og-image.png"],
+    images: [withBasePath("/og-image.png")],
   },
   other: {
     "apple-itunes-app": "app-id=6754703001",
