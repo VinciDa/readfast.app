@@ -30,14 +30,22 @@ export default function Navbar() {
           <BrandLogo size="sm" wordmarkClassName="text-lg sm:text-xl" />
         </a>
 
-        <a
-          href={getStoreUrl("ios", "nav_cta")}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hidden sm:inline-flex items-center gap-2 h-10 px-5 rounded-lg bg-accent text-bg text-sm font-semibold transition-all duration-200 hover:scale-[1.03] hover:brightness-110"
-        >
-          Download Free
-        </a>
+        <div className="flex items-center gap-4">
+          <a
+            href="/reading-speed-test"
+            className="hidden md:block text-sm text-muted hover:text-foreground transition-colors"
+          >
+            Speed Test
+          </a>
+          <a
+            href={getStoreUrl("ios", "nav_cta")}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden sm:inline-flex items-center gap-2 h-10 px-5 rounded-lg bg-accent text-bg text-sm font-semibold transition-all duration-200 hover:scale-[1.03] hover:brightness-110"
+          >
+            Download Free
+          </a>
+        </div>
       </div>
     </motion.nav>
   );
