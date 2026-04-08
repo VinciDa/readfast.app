@@ -25,6 +25,10 @@ export const metadata: Metadata = {
   description:
     "Read 3× faster with RSVP technology. ReadFast helps students, professionals, and ADHD readers focus, retain more, and power through PDFs and books. Free on iOS & Android.",
   metadataBase: new URL("https://readfast.app"),
+  icons: {
+    icon: "/readfast-logo.jpg",
+    apple: "/readfast-logo.jpg",
+  },
   keywords: [
     "speed reading",
     "RSVP reading",

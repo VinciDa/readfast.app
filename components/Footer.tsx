@@ -1,3 +1,4 @@
+import BrandLogo from "@/components/BrandLogo";
 import { getStoreUrl } from "@/lib/platform";
 
 export default function Footer() {
@@ -5,10 +6,8 @@ export default function Footer() {
     <footer className="border-t border-border py-8">
       <div className="max-w-7xl mx-auto px-5 lg:px-8">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <span className="text-sm font-display font-bold tracking-tight">
-              Read<span className="text-accent">Fast</span>
-            </span>
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+            <BrandLogo size="sm" wordmarkClassName="text-sm" />
             <span className="text-xs text-muted">
               © {new Date().getFullYear()} Bitart Private Limited
             </span>

@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import BrandLogo from "@/components/BrandLogo";
 import StoreButtons from "./StoreButtons";
 
 export default function FinalCTA() {
@@ -16,6 +17,9 @@ export default function FinalCTA() {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6 }}
         >
+          <div className="flex justify-center mb-8">
+            <BrandLogo size="lg" showWordmark={false} />
+          </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-display font-bold leading-tight mb-6">
             Your reading list isn&apos;t
             <br />

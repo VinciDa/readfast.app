@@ -1,9 +1,10 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-bg: #0A0C10;
-  --color-surface: #12151C;
-  --color-surface-alt: #1A1F2B;
+  /* Align with app icon: pure black canvas + mint accent for CTAs */
+  --color-bg: #000000;
+  --color-surface: #0a0a0c;
+  --color-surface-alt: #12151a;
   --color-accent: #3EFFA8;
   --color-amber: #FFB547;
   --color-foreground: #F0F2F6;
@@ -21,13 +22,13 @@
 
 html {
   scroll-behavior: smooth;
-  background-color: #0A0C10;
+  background-color: #000000;
   color: #F0F2F6;
 }
 
 body {
   font-family: var(--font-body), system-ui, sans-serif;
-  background-color: #0A0C10;
+  background-color: #000000;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
