@@ -6,17 +6,17 @@ const problems = [
   {
     icon: "📚",
     headline: "You have 47 unread articles",
-    body: "Saved for later. Still there. Six months later.",
+    body: "Saved for later. Still there. Six months later. Skimming through them doesn't help — you need a real reading system.",
   },
   {
     icon: "😵",
     headline: "You re-read the same paragraph four times",
-    body: "Focus drifts. Time disappears. Progress stalls.",
+    body: "Reading comprehension suffers when focus drifts. You lose time, lose progress, lose meaning.",
   },
   {
     icon: "📄",
     headline: "Your PDFs live in email, not in your brain",
-    body: "Import hell. Can't annotate. Can't track progress.",
+    body: "Import hell. Can't annotate. Can't track your reading speed or progress.",
   },
 ];
 

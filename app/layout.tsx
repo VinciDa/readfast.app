@@ -21,9 +21,9 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ReadFast — Speed Reading App for iPhone & Android",
+  title: "ReadFast — Speed Reading App | Improve Reading Speed & Comprehension",
   description:
-    "Read 3× faster with RSVP technology. ReadFast helps students, professionals, and ADHD readers focus, retain more, and power through PDFs and books. Free on iOS & Android.",
+    "Improve your reading speed from 200 to 600+ WPM. ReadFast replaces skimming with RSVP technology — boosting reading comprehension so you get through books, PDFs, and articles 3× faster. Free reading app for iOS & Android.",
   metadataBase: new URL("https://readfast.app"),
   icons: {
     icon: "/readfast-logo.jpg",
@@ -31,18 +31,24 @@ export const metadata: Metadata = {
   },
   keywords: [
     "speed reading",
-    "RSVP reading",
     "reading app",
-    "focus",
+    "reading speed",
+    "reading speed test",
+    "check reading speed",
+    "reading comprehension",
+    "skimming",
+    "RSVP reading",
+    "reading book",
+    "my reading",
     "ADHD reading",
     "PDF reader",
     "bionic reading",
     "text to speech",
   ],
   openGraph: {
-    title: "ReadFast — Read 3× Faster. Retain What Matters.",
+    title: "ReadFast — Speed Reading App | Test & Improve Your Reading Speed",
     description:
-      "Speed reading app with RSVP technology, focus tools, and unlimited PDF imports. Free on iOS & Android.",
+      "Ditch skimming. Boost your reading speed and comprehension with RSVP technology, focus tools, and unlimited PDF imports. Free reading app for iOS & Android.",
     url: "https://readfast.app",
     siteName: "ReadFast",
     images: [
@@ -50,7 +56,7 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "ReadFast — Speed Reading App",
+        alt: "ReadFast — Speed Reading App to Boost Reading Speed and Comprehension",
       },
     ],
     locale: "en_US",
@@ -58,9 +64,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "ReadFast — Read 3× Faster. Retain What Matters.",
+    title: "ReadFast — Speed Reading App | Test & Improve Your Reading Speed",
     description:
-      "Speed reading app with RSVP technology, focus tools, and unlimited PDF imports.",
+      "Ditch skimming. Boost your reading speed and comprehension with RSVP technology, focus tools, and unlimited PDF imports.",
     images: ["/og-image.png"],
   },
   other: {
@@ -73,10 +79,12 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const jsonLd = {
+  const appJsonLd = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     name: "ReadFast - Speed Reading",
+    description:
+      "Speed reading app using RSVP technology to boost reading speed and comprehension. Read books, PDFs, and articles 3× faster without skimming.",
     applicationCategory: "EducationApplication",
     operatingSystem: "iOS, Android",
     offers: {
@@ -89,6 +97,53 @@ export default function RootLayout({
       ratingValue: "5.0",
       ratingCount: "1",
     },
+    featureList: [
+      "Speed reading with RSVP technology",
+      "Reading speed test and tracking",
+      "Improved reading comprehension",
+      "PDF reader with smart text extraction",
+      "Bionic reading mode",
+      "Text-to-speech",
+    ],
+  };
+
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "How can I check my reading speed?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "You can check your reading speed using ReadFast's built-in reading speed test. Paste any text into the demo, set a WPM (words per minute) target, and see if you can keep up. Most people read at 200–250 WPM — ReadFast helps you train up to 600+ WPM.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "What is a good reading speed?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "The average reading speed is around 200–250 WPM. A good reading speed with solid comprehension is 300–400 WPM. With RSVP speed reading training, readers can comfortably reach 500–600+ WPM while maintaining strong reading comprehension.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Is skimming bad for reading comprehension?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Skimming trades comprehension for speed — you read faster but retain less. RSVP speed reading is different: it trains your brain to process every word faster, so you improve both reading speed and reading comprehension at the same time.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "What is the best speed reading app?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "ReadFast is a top-rated speed reading app for iOS and Android. It uses RSVP technology, bionic reading, focus mode, and text-to-speech to help you read books, PDFs, and articles up to 3× faster — free to download with no ads.",
+        },
+      },
+    ],
   };
 
   return (
@@ -99,7 +154,11 @@ export default function RootLayout({
       <head>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(appJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
         />
       </head>
       <body className="min-h-screen bg-bg text-foreground font-body">

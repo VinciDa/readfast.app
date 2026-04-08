@@ -155,9 +155,9 @@ function PhoneMockup() {
 }
 
 const floatingBadges = [
-  { icon: "⚡", text: "3× Faster Reading", delay: 0.9 },
+  { icon: "⚡", text: "3× Faster Reading Speed", delay: 0.9 },
   { icon: "🧠", text: "ADHD-Friendly", delay: 1.1 },
-  { icon: "🔒", text: "Zero Data Collection", delay: 1.3 },
+  { icon: "📊", text: "Track Your Reading Speed", delay: 1.3 },
 ];
 
 export default function Hero() {
@@ -181,7 +181,7 @@ export default function Hero() {
               transition={{ delay: 0.12, duration: 0.5 }}
               className="text-xs tracking-[0.25em] uppercase text-muted font-mono"
             >
-              Speed Reading · Focus · PDF Reader
+              Speed Reading · Reading Comprehension · PDF Reader
             </motion.p>
 
             <motion.h1
@@ -201,9 +201,9 @@ export default function Hero() {
               transition={{ delay: 0.42, duration: 0.5 }}
               className="text-lg text-muted max-w-lg mx-auto lg:mx-0 leading-relaxed"
             >
-              ReadFast uses RSVP technology and AI-powered focus tools to help
-              you tear through books, PDFs, and articles — without losing a
-              word.
+              ReadFast uses RSVP technology to train your reading speed from
+              200 to 600+ WPM — eliminating skimming so every word lands with
+              full reading comprehension.
             </motion.p>
 
             <motion.div

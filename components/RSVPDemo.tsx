@@ -87,13 +87,14 @@ export default function RSVPDemo() {
           className="text-center mb-12"
         >
           <p className="text-xs tracking-[0.25em] uppercase text-accent font-mono mb-4">
-            Interactive Demo
+            Free Reading Speed Test
           </p>
           <h2 className="text-3xl sm:text-4xl font-display font-bold mb-4">
-            Try it right now
+            Check your reading speed
           </h2>
           <p className="text-muted max-w-lg mx-auto">
-            Paste any text and experience RSVP reading before you download.
+            Paste any text, pick a speed, and see how fast your reading can go
+            — then take it further with ReadFast.
           </p>
         </motion.div>
 

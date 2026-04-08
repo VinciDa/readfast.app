@@ -6,9 +6,9 @@ const features = [
   {
     tag: "RSVP Speed Reading",
     headline: "Read faster than you thought possible",
-    body: "RSVP (Rapid Serial Visual Presentation) flashes words at the center of your focus — no eye movement, no skimming. Train from 200 to 600+ WPM.",
+    body: "RSVP (Rapid Serial Visual Presentation) eliminates skimming by flashing one word at a time at the center of your focus — no eye movement, no wandering. Train your reading speed from 200 to 600+ WPM while improving reading comprehension.",
     bullets: [
-      "Adjustable reading speed",
+      "Adjustable reading speed with real-time WPM tracking",
       "Word-by-word or chunked display",
       "ORP markers guide your eye naturally",
     ],
@@ -17,7 +17,7 @@ const features = [
   {
     tag: "Focus Mode",
     headline: "A reading environment that actually helps you focus",
-    body: "Distraction-free full-screen mode paired with ambient soundscapes — scientifically designed to extend your attention span.",
+    body: "Distraction-free full-screen mode paired with ambient soundscapes — scientifically designed to extend your attention span and improve reading comprehension.",
     bullets: [
       "Calming piano, nature sounds, meditative tracks",
       "Blue light filter",
@@ -28,7 +28,7 @@ const features = [
   {
     tag: "PDF & Document Reader",
     headline: "Your entire reading life, in one place",
-    body: "Import unlimited PDFs, articles, and books. Smart chunking formats long-form content for mobile reading. Save it now, read it anytime.",
+    body: "Import unlimited PDFs, articles, and reading books. Smart chunking formats long-form content for mobile reading. Your entire reading list, always available.",
     bullets: [
       "Unlimited imports",
       "Smart text extraction",
