@@ -26,6 +26,9 @@ export const metadata: Metadata = {
   description:
     "Improve your reading speed from 200 to 600+ WPM. ReadFast replaces skimming with RSVP technology — boosting reading comprehension so you get through books, PDFs, and articles 3× faster. Free reading app for iOS & Android.",
   metadataBase: new URL("https://readfast.app"),
+  alternates: {
+    canonical: "/",
+  },
   icons: {
     icon: withBasePath("/readfast-logo.jpg"),
     apple: withBasePath("/readfast-logo.jpg"),

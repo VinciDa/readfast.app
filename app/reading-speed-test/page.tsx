@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     "Take our free reading speed test and calculate your reading speed in words per minute (WPM). Check reading comprehension too — then discover how to read 3× faster with ReadFast.",
   metadataBase: new URL("https://readfast.app"),
   alternates: {
-    canonical: "https://readfast.app/reading-speed-test",
+    canonical: "/reading-speed-test/",
   },
   keywords: [
     "reading speed test",

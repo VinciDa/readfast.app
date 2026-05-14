@@ -3,7 +3,6 @@
 import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import BrandLogo from "@/components/BrandLogo";
 import StoreButtons from "./StoreButtons";
 import { withBasePath } from "@/lib/base-path";
 import { getORPIndex } from "@/lib/platform";
@@ -167,19 +166,10 @@ export default function Hero() {
       <div className="max-w-7xl mx-auto w-full px-5 lg:px-8 pt-24 pb-16">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <div className="flex flex-col gap-6 text-center lg:text-left">
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.05, duration: 0.45 }}
-              className="flex justify-center lg:justify-start"
-            >
-              <BrandLogo size="xl" showWordmark={false} priority />
-            </motion.div>
-
             <motion.p
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.12, duration: 0.5 }}
+              transition={{ delay: 0.1, duration: 0.5 }}
               className="text-xs tracking-[0.25em] uppercase text-muted font-mono"
             >
               Speed Reading · Reading Comprehension · PDF Reader
@@ -188,7 +178,7 @@ export default function Hero() {
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.22, duration: 0.6 }}
+              transition={{ delay: 0.2, duration: 0.6 }}
               className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-display font-bold leading-[1.08] tracking-tight"
             >
               Read 3× Faster.
@@ -199,7 +189,7 @@ export default function Hero() {
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.42, duration: 0.5 }}
+              transition={{ delay: 0.38, duration: 0.5 }}
               className="text-lg text-muted max-w-lg mx-auto lg:mx-0 leading-relaxed"
             >
               ReadFast uses RSVP technology to train your reading speed from
@@ -210,7 +200,7 @@ export default function Hero() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.56, duration: 0.5 }}
+              transition={{ delay: 0.5, duration: 0.5 }}
             >
               <StoreButtons
                 utmContent="hero_cta"
@@ -224,7 +214,7 @@ export default function Hero() {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.9, duration: 0.6 }}
+              transition={{ delay: 0.82, duration: 0.6 }}
               className="flex flex-wrap gap-3 justify-center lg:justify-start mt-2"
             >
               {floatingBadges.map((badge) => (

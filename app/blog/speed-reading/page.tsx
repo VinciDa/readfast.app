@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     "Learn practical speed reading techniques you can start using today: visual pacing, subvocalization reduction, chunking, skimming, and reduced regression.",
   metadataBase: new URL("https://readfast.app"),
   alternates: {
-    canonical: "https://readfast.app/blog/speed-reading",
+    canonical: "/blog/speed-reading/",
   },
   keywords: [
     "speed reading",
