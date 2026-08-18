@@ -1,3 +1,4 @@
+import Link from "next/link";
 import BrandLogo from "@/components/BrandLogo";
 import { getStoreUrl } from "@/lib/platform";
 
@@ -13,7 +14,19 @@ export default function Footer() {
             </span>
           </div>
 
-          <div className="flex items-center gap-6 text-xs text-muted">
+          <div className="flex flex-wrap items-center justify-center sm:justify-end gap-x-6 gap-y-2 text-xs text-muted">
+            <Link
+              href="/rsvp"
+              className="hover:text-foreground transition-colors"
+            >
+              Try RSVP
+            </Link>
+            <Link
+              href="/reading-speed-test"
+              className="hover:text-foreground transition-colors"
+            >
+              Speed Test
+            </Link>
             <a href="#" className="hover:text-foreground transition-colors">
               Privacy Policy
             </a>

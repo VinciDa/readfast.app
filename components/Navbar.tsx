@@ -33,16 +33,22 @@ export default function Navbar() {
 
         <div className="flex items-center gap-4">
           <Link
-            href="/blog"
-            className="hidden md:block text-sm text-muted hover:text-foreground transition-colors"
+            href="/rsvp"
+            className="text-sm text-muted hover:text-foreground transition-colors"
           >
-            Blogs
+            Try RSVP
           </Link>
           <Link
             href="/reading-speed-test"
             className="hidden md:block text-sm text-muted hover:text-foreground transition-colors"
           >
             Speed Test
+          </Link>
+          <Link
+            href="/blog"
+            className="hidden md:block text-sm text-muted hover:text-foreground transition-colors"
+          >
+            Blogs
           </Link>
           <a
             href={getStoreUrl("ios", "nav_cta")}

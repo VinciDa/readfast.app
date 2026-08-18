@@ -13,6 +13,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
+      url: `${BASE_URL}/rsvp/`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
       url: `${BASE_URL}/reading-speed-test/`,
       lastModified: new Date(),
       changeFrequency: "monthly",
@@ -22,6 +28,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${BASE_URL}/blog/`,
       lastModified: new Date(),
       changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: `${BASE_URL}/blog/reduce-subvocalization/`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
       priority: 0.8,
     },
     {

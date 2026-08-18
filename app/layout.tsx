@@ -114,7 +114,7 @@ export default function RootLayout({
         name: "How can I check my reading speed?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "You can check your reading speed using ReadFast's built-in reading speed test. Paste any text into the demo, set a WPM (words per minute) target, and see if you can keep up. Most people read at 200–250 WPM — ReadFast helps you train up to 600+ WPM.",
+          text: "You can check your reading speed using ReadFast's free reading speed test. Most people read at 200–250 WPM. Try RSVP in the browser with a short excerpt, then download ReadFast to train up to 600+ WPM on PDFs, books, and articles.",
         },
       },
       {

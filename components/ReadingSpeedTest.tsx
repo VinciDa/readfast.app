@@ -533,13 +533,19 @@ export default function ReadingSpeedTest() {
               </div>
 
               {/* Retry / Back */}
-              <div className="flex gap-3 justify-center">
+              <div className="flex flex-wrap gap-3 justify-center">
                 <button
                   onClick={handleRetry}
                   className="h-10 px-5 rounded-lg text-sm text-muted border border-border hover:border-accent/30 hover:text-foreground transition-all"
                 >
                   Take the test again
                 </button>
+                <Link
+                  href="/rsvp"
+                  className="h-10 px-5 rounded-lg text-sm text-muted border border-border hover:border-accent/30 hover:text-foreground transition-all inline-flex items-center"
+                >
+                  Try RSVP
+                </Link>
                 <Link
                   href="/"
                   className="h-10 px-5 rounded-lg text-sm text-muted border border-border hover:border-accent/30 hover:text-foreground transition-all inline-flex items-center"

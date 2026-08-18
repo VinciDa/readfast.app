@@ -19,7 +19,11 @@ function PlayIcon() {
   );
 }
 
-export default function MobileStickyBar() {
+export default function MobileStickyBar({
+  utmContent = "sticky_bar",
+}: {
+  utmContent?: string;
+}) {
   const [visible, setVisible] = useState(false);
   const [platform, setPlatform] = useState<Platform>("both");
 
@@ -30,8 +34,8 @@ export default function MobileStickyBar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const iosUrl = getStoreUrl("ios", "sticky_bar_ios");
-  const androidUrl = getStoreUrl("android", "sticky_bar_android");
+  const iosUrl = getStoreUrl("ios", `${utmContent}_ios`);
+  const androidUrl = getStoreUrl("android", `${utmContent}_android`);
 
   return (
     <div
