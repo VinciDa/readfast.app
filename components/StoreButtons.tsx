@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { getPlatform, getStoreUrl, type Platform } from "@/lib/platform";
+import { trackStoreClick } from "@/lib/analytics";
 
 function AppleIcon({ className = "w-5 h-5" }: { className?: string }) {
   return (
@@ -51,6 +52,7 @@ export default function StoreButtons({
       href={iosUrl}
       target="_blank"
       rel="noopener noreferrer"
+      onClick={() => trackStoreClick(utmContent, "ios")}
       className={`inline-flex items-center justify-center rounded-xl font-medium transition-all duration-200 hover:scale-[1.03] ${sizeClasses} ${
         (iosFirst ? true : false)
           ? "bg-accent text-bg hover:brightness-110"
@@ -65,6 +67,7 @@ export default function StoreButtons({
       href={androidUrl}
       target="_blank"
       rel="noopener noreferrer"
+      onClick={() => trackStoreClick(utmContent, "android")}
       className={`inline-flex items-center justify-center rounded-xl font-medium transition-all duration-200 hover:scale-[1.03] ${sizeClasses} ${
         (!iosFirst ? true : false)
           ? "bg-accent text-bg hover:brightness-110"

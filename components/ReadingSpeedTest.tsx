@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import StoreButtons from "./StoreButtons";
+import { track } from "@/lib/analytics";
 
 // ~243 words — used for WPM calculation
 const PASSAGE = `Reading is one of the most complex cognitive tasks the human brain performs. Unlike speaking or listening, which develop naturally in children exposed to language, reading must be explicitly taught. The brain has no dedicated region for reading — instead, it repurposes areas originally evolved for object recognition and spoken language.
@@ -110,6 +111,7 @@ export default function ReadingSpeedTest() {
   useEffect(() => stopTimer, []);
 
   const handleStart = () => {
+    track("speed_test_start");
     setPhase("reading");
     setElapsedMs(0);
     intervalRef.current = setInterval(
@@ -121,7 +123,12 @@ export default function ReadingSpeedTest() {
   const handleFinished = () => {
     stopTimer();
     const minutes = elapsedMs / 60000;
-    setWpm(Math.round(WORD_COUNT / minutes));
+    const nextWpm = Math.round(WORD_COUNT / minutes);
+    setWpm(nextWpm);
+    track("speed_test_finished_reading", {
+      elapsed_ms: elapsedMs,
+      wpm: nextWpm,
+    });
     setPhase("quiz");
   };
 
@@ -134,11 +141,19 @@ export default function ReadingSpeedTest() {
 
   const handleSeeResults = () => {
     const correct = answers.filter((a, i) => a === QUESTIONS[i].correct).length;
-    setComprehension(Math.round((correct / QUESTIONS.length) * 100));
+    const score = Math.round((correct / QUESTIONS.length) * 100);
+    const rating = getRating(wpm);
+    setComprehension(score);
+    track("speed_test_see_results", {
+      wpm,
+      comprehension: score,
+      rating: rating.label.toLowerCase().replace(/\s+/g, "_"),
+    });
     setPhase("results");
   };
 
   const handleRetry = () => {
+    track("speed_test_retry");
     stopTimer();
     setPhase("intro");
     setElapsedMs(0);
@@ -542,12 +557,16 @@ export default function ReadingSpeedTest() {
                 </button>
                 <Link
                   href="/rsvp"
+                  onClick={() => track("speed_test_to_rsvp")}
                   className="h-10 px-5 rounded-lg text-sm text-muted border border-border hover:border-accent/30 hover:text-foreground transition-all inline-flex items-center"
                 >
                   Try RSVP
                 </Link>
                 <Link
                   href="/"
+                  onClick={() =>
+                    track("nav_click", { target: "home", source: "speed_test" })
+                  }
                   className="h-10 px-5 rounded-lg text-sm text-muted border border-border hover:border-accent/30 hover:text-foreground transition-all inline-flex items-center"
                 >
                   Back to ReadFast

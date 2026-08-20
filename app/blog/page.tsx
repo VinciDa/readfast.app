@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { formatPostDate, posts } from "@/lib/blog-posts";
+import TrackedNavLink from "@/components/TrackedNavLink";
 
 export const metadata: Metadata = {
   title: "ReadFast Blog | Speed Reading, Focus, and Comprehension",
@@ -26,7 +26,11 @@ export default function BlogIndexPage() {
         <ul className="blog-post-list">
           {posts.map((post) => (
             <li key={post.href}>
-              <Link href={post.href}>
+              <TrackedNavLink
+                href={post.href}
+                target={post.slug}
+                source="blog_index"
+              >
                 <h2>{post.title}</h2>
                 <p>{post.description}</p>
                 <p className="blog-meta">
@@ -34,7 +38,7 @@ export default function BlogIndexPage() {
                   <span aria-hidden="true"> · </span>
                   <span>{post.readingMinutes} min read</span>
                 </p>
-              </Link>
+              </TrackedNavLink>
             </li>
           ))}
         </ul>

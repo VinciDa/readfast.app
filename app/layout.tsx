@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Instrument_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { withBasePath } from "@/lib/base-path";
+import PageViewTracker from "@/components/PageViewTracker";
 
 const instrumentSans = Instrument_Sans({
   variable: "--font-instrument-sans",
@@ -160,6 +161,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen bg-bg text-foreground font-body">
+        <PageViewTracker />
         {children}
       </body>
     </html>

@@ -2,9 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import Link from "next/link";
 import BrandLogo from "@/components/BrandLogo";
+import TrackedNavLink from "@/components/TrackedNavLink";
 import { getStoreUrl } from "@/lib/platform";
+import { trackStoreClick } from "@/lib/analytics";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -27,33 +28,40 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-7xl mx-auto flex h-16 items-center justify-between px-5 lg:px-8">
-        <Link href="/" className="group">
+        <TrackedNavLink href="/" target="home" source="nav" className="group">
           <BrandLogo size="sm" wordmarkClassName="text-lg sm:text-xl" />
-        </Link>
+        </TrackedNavLink>
 
         <div className="flex items-center gap-4">
-          <Link
+          <TrackedNavLink
             href="/rsvp"
+            target="rsvp"
+            source="nav"
             className="text-sm text-muted hover:text-foreground transition-colors"
           >
             Try RSVP
-          </Link>
-          <Link
+          </TrackedNavLink>
+          <TrackedNavLink
             href="/reading-speed-test"
+            target="speed_test"
+            source="nav"
             className="hidden md:block text-sm text-muted hover:text-foreground transition-colors"
           >
             Speed Test
-          </Link>
-          <Link
+          </TrackedNavLink>
+          <TrackedNavLink
             href="/blog"
+            target="blog"
+            source="nav"
             className="hidden md:block text-sm text-muted hover:text-foreground transition-colors"
           >
             Blogs
-          </Link>
+          </TrackedNavLink>
           <a
             href={getStoreUrl("ios", "nav_cta")}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackStoreClick("nav_cta", "ios")}
             className="hidden sm:inline-flex items-center gap-2 h-10 px-5 rounded-lg bg-accent text-bg text-sm font-semibold transition-all duration-200 hover:scale-[1.03] hover:brightness-110"
           >
             Download Free

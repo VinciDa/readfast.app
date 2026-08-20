@@ -6,13 +6,26 @@ import StoreButtons from "./StoreButtons";
 import RsvpWord from "@/components/rsvp/RsvpWord";
 import { useRsvpPlayer } from "@/components/rsvp/useRsvpPlayer";
 import { RSVP_DEMO_TEXT, RSVP_SPEEDS, processRsvpText } from "@/lib/rsvp";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { track } from "@/lib/analytics";
 
 const DEMO_TOKENS = processRsvpText(RSVP_DEMO_TEXT).tokens;
 
 export default function RSVPDemo() {
   const [speed, setSpeed] = useState(250);
   const player = useRsvpPlayer(DEMO_TOKENS, speed);
+
+  const trackedComplete = useRef(false);
+
+  useEffect(() => {
+    if (!player.finished) {
+      trackedComplete.current = false;
+      return;
+    }
+    if (trackedComplete.current) return;
+    trackedComplete.current = true;
+    track("home_demo_complete", { wpm: speed });
+  }, [player.finished, speed]);
 
   return (
     <section id="demo" className="py-24 lg:py-32">
@@ -82,6 +95,7 @@ export default function RSVPDemo() {
                 <p className="mt-5">
                   <Link
                     href="/rsvp"
+                    onClick={() => track("home_demo_to_rsvp")}
                     className="text-sm text-accent hover:brightness-110"
                   >
                     Or try a short excerpt in the browser →
@@ -114,7 +128,10 @@ export default function RSVPDemo() {
                 {!player.isPlaying ? (
                   <button
                     type="button"
-                    onClick={player.play}
+                    onClick={() => {
+                      if (!player.started) track("home_demo_play", { wpm: speed });
+                      player.play();
+                    }}
                     className="flex items-center gap-2 h-9 px-5 rounded-lg bg-accent text-bg text-sm font-semibold hover:brightness-110 transition-all"
                   >
                     <svg
@@ -154,12 +171,17 @@ export default function RSVPDemo() {
 
             <p className="text-xs text-muted leading-relaxed">
               Demo text is fixed on purpose.{" "}
-              <Link href="/rsvp" className="text-accent hover:brightness-110">
+              <Link
+                href="/rsvp"
+                onClick={() => track("home_demo_to_rsvp")}
+                className="text-accent hover:brightness-110"
+              >
                 Try RSVP with your own excerpt
               </Link>{" "}
               (500-word cap) — or{" "}
               <Link
                 href="/reading-speed-test"
+                onClick={() => track("home_demo_to_speed_test")}
                 className="text-foreground/80 hover:text-foreground"
               >
                 check your WPM

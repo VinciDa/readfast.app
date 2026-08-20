@@ -1,6 +1,9 @@
-import Link from "next/link";
+"use client";
+
 import BrandLogo from "@/components/BrandLogo";
+import TrackedNavLink from "@/components/TrackedNavLink";
 import { getStoreUrl } from "@/lib/platform";
+import { trackStoreClick } from "@/lib/analytics";
 
 export default function Footer() {
   return (
@@ -15,18 +18,22 @@ export default function Footer() {
           </div>
 
           <div className="flex flex-wrap items-center justify-center sm:justify-end gap-x-6 gap-y-2 text-xs text-muted">
-            <Link
+            <TrackedNavLink
               href="/rsvp"
+              target="rsvp"
+              source="footer"
               className="hover:text-foreground transition-colors"
             >
               Try RSVP
-            </Link>
-            <Link
+            </TrackedNavLink>
+            <TrackedNavLink
               href="/reading-speed-test"
+              target="speed_test"
+              source="footer"
               className="hover:text-foreground transition-colors"
             >
               Speed Test
-            </Link>
+            </TrackedNavLink>
             <a href="#" className="hover:text-foreground transition-colors">
               Privacy Policy
             </a>
@@ -34,6 +41,7 @@ export default function Footer() {
               href={getStoreUrl("ios", "footer_link")}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackStoreClick("footer_link", "ios")}
               className="hover:text-foreground transition-colors"
             >
               App Store
@@ -42,6 +50,7 @@ export default function Footer() {
               href={getStoreUrl("android", "footer_link")}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackStoreClick("footer_link", "android")}
               className="hover:text-foreground transition-colors"
             >
               Google Play

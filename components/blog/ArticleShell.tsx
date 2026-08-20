@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { formatPostDate } from "@/lib/blog-posts";
 
+export { default as ArticleCta } from "@/components/blog/ArticleCta";
+
 export type TocItem = {
   id: string;
   label: string;
@@ -60,35 +62,3 @@ export default function ArticleShell({
   );
 }
 
-type ArticleCtaProps = {
-  title: string;
-  children: React.ReactNode;
-  primaryHref: string;
-  primaryLabel: string;
-  secondaryHref: string;
-  secondaryLabel: string;
-};
-
-export function ArticleCta({
-  title,
-  children,
-  primaryHref,
-  primaryLabel,
-  secondaryHref,
-  secondaryLabel,
-}: ArticleCtaProps) {
-  return (
-    <aside className="blog-cta">
-      <h2>{title}</h2>
-      <div className="blog-cta-copy">{children}</div>
-      <div className="blog-cta-actions">
-        <Link href={primaryHref} className="blog-btn-primary">
-          {primaryLabel}
-        </Link>
-        <Link href={secondaryHref} className="blog-btn-secondary">
-          {secondaryLabel}
-        </Link>
-      </div>
-    </aside>
-  );
-}

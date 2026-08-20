@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { getPlatform, getStoreUrl, type Platform } from "@/lib/platform";
+import { trackStoreClick } from "@/lib/analytics";
 
 function AppleIcon() {
   return (
@@ -47,6 +48,7 @@ export default function MobileStickyBar({
             href={iosUrl}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackStoreClick(utmContent, "ios")}
             className="flex-1 flex items-center justify-center gap-2 h-12 rounded-xl bg-accent text-bg text-sm font-semibold"
           >
             <AppleIcon />
@@ -58,6 +60,7 @@ export default function MobileStickyBar({
             href={androidUrl}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackStoreClick(utmContent, "android")}
             className={`flex-1 flex items-center justify-center gap-2 h-12 rounded-xl text-sm font-semibold ${
               platform === "android"
                 ? "bg-accent text-bg"

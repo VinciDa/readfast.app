@@ -15,6 +15,7 @@ import {
   formatDuration,
   processRsvpText,
 } from "@/lib/rsvp";
+import { track } from "@/lib/analytics";
 
 const APP_HOOKS = [
   {
@@ -50,15 +51,31 @@ export default function RsvpTryOut() {
       e.preventDefault();
       if (finished) return;
       if (isPlaying) pause();
-      else play();
+      else if (!player.started) {
+        track("rsvp_start", {
+          wpm,
+          word_count: doc.tokens.length,
+          truncated: doc.truncated,
+        });
+        play();
+      } else play();
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [play, pause, isPlaying, finished]);
+  }, [play, pause, isPlaying, finished, player.started, wpm, doc.tokens.length, doc.truncated]);
 
   const playable = doc.tokens.length;
   const minutes = estimateMinutes(playable, wpm);
   const utmComplete = doc.truncated ? "rsvp_limit_complete" : "rsvp_complete";
+
+  const handleStart = () => {
+    track("rsvp_start", {
+      wpm,
+      word_count: playable,
+      truncated: doc.truncated,
+    });
+    player.play();
+  };
 
   return (
     <section className="min-h-screen bg-bg pt-20 pb-28 lg:pt-24 lg:pb-20">
@@ -76,7 +93,7 @@ export default function RsvpTryOut() {
               overflow={doc.overflow}
               onText={setText}
               onWpm={setWpm}
-              onStart={player.play}
+              onStart={handleStart}
             />
           )}
 
@@ -89,6 +106,13 @@ export default function RsvpTryOut() {
               overflow={doc.overflow}
               player={player}
               onWpm={setWpm}
+              onExit={() => {
+                track("rsvp_exit", {
+                  wpm,
+                  progress: Math.round(player.progress),
+                });
+                player.reset();
+              }}
             />
           )}
 
@@ -101,7 +125,10 @@ export default function RsvpTryOut() {
               truncated={doc.truncated}
               overflow={doc.overflow}
               utmContent={utmComplete}
-              onAgain={player.reset}
+              onAgain={() => {
+                track("rsvp_try_another");
+                player.reset();
+              }}
             />
           )}
         </AnimatePresence>
@@ -253,6 +280,7 @@ function Reading({
   overflow,
   player,
   onWpm,
+  onExit,
 }: {
   wpm: number;
   playable: number;
@@ -260,6 +288,7 @@ function Reading({
   overflow: number;
   player: ReturnType<typeof useRsvpPlayer>;
   onWpm: (value: number) => void;
+  onExit: () => void;
 }) {
   return (
     <motion.div
@@ -320,7 +349,7 @@ function Reading({
             )}
             <button
               type="button"
-              onClick={player.reset}
+              onClick={onExit}
               className="h-10 px-4 rounded-lg text-sm text-muted hover:text-foreground border border-border hover:border-accent/40"
             >
               Exit
@@ -353,6 +382,13 @@ function Complete({
   utmContent: string;
   onAgain: () => void;
 }) {
+  useEffect(() => {
+    track("rsvp_complete", {
+      wpm,
+      words_read: wordsRead,
+      truncated,
+    });
+  }, [wpm, wordsRead, truncated]);
   return (
     <motion.div
       initial={{ opacity: 0, y: 24 }}
@@ -432,6 +468,7 @@ function Complete({
         </button>
         <Link
           href="/reading-speed-test"
+          onClick={() => track("rsvp_to_speed_test")}
           className="h-10 px-5 rounded-lg text-sm text-muted border border-border hover:border-accent/30 hover:text-foreground transition-all inline-flex items-center"
         >
           Check your WPM
