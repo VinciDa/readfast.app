@@ -25,7 +25,7 @@ export type AnalyticsProps = Record<string, string | number | boolean>;
 
 const APP_NAME = "readfast_web";
 const ENDPOINT = "https://quizbanao.com/api/v1/audit-events";
-const WRITE_KEY = process.env.NEXT_PUBLIC_AUDIT_WRITE_KEY ?? "";
+const WRITE_KEY = "3e8b1c6a-9f24-4d71-b5a0-2c7e91d4f608";
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const SESSION_KEY = "rf_session_id";
 const DEVICE_KEY = "rf_device_id";
