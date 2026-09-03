@@ -9,6 +9,36 @@ export type BlogPost = {
 
 export const posts: BlogPost[] = [
   {
+    slug: "stop-regression-reading",
+    href: "/blog/stop-regression-reading",
+    title:
+      "Reading Regression: Why You Keep Re-Reading Lines (And How to Stop)",
+    description:
+      "Your eyes jump backwards 15–20% of the time without you noticing. Most of it is habit, not need. Learn what causes reading regression and how to build forward momentum instead.",
+    date: "2026-09-03",
+    readingMinutes: 6,
+  },
+  {
+    slug: "chunking-speed-reading",
+    href: "/blog/chunking-speed-reading",
+    title:
+      "You're Reading One Word at a Time. Chunking Fixes That.",
+    description:
+      "Your eyes can capture multiple words in a single glance — but most readers never use that ability. Learn what chunking is, why it works, and three exercises to make it automatic.",
+    date: "2026-09-03",
+    readingMinutes: 6,
+  },
+  {
+    slug: "visual-pacer-reading-speed",
+    href: "/blog/visual-pacer-reading-speed",
+    title:
+      "Your Eyes Drift Backwards While You Read. A Visual Pacer Fixes That.",
+    description:
+      "Most readers regress 10–20 times per 100 words without realising it. Learn what a visual pacer is, why it works, and how to use one to read faster starting today.",
+    date: "2026-09-03",
+    readingMinutes: 6,
+  },
+  {
     slug: "reduce-subvocalization",
     href: "/blog/reduce-subvocalization",
     title:

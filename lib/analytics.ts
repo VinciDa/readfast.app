@@ -24,7 +24,8 @@ export type AuditEvent = (typeof AUDIT_EVENTS)[number];
 export type AnalyticsProps = Record<string, string | number | boolean>;
 
 const APP_NAME = "readfast_web";
-const ENDPOINT = "https://quizbanao.com/api/v1/audit-events";
+const REMOTE_ENDPOINT = "https://quizbanao.com/api/v1/audit-events";
+const LOCAL_ENDPOINT = "/ingest/audit-events/";
 const WRITE_KEY = "3e8b1c6a-9f24-4d71-b5a0-2c7e91d4f608";
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const SESSION_KEY = "rf_session_id";
@@ -104,6 +105,12 @@ function shouldSkipDuplicate(event: AuditEvent, props: AnalyticsProps): boolean 
   return false;
 }
 
+function isLocalHost(): boolean {
+  if (typeof window === "undefined") return false;
+  const host = window.location.hostname;
+  return host === "localhost" || host === "127.0.0.1";
+}
+
 export function track(event: AuditEvent, properties: AnalyticsProps = {}): void {
   if (typeof window === "undefined") return;
   if (!WRITE_KEY) return;
@@ -128,18 +135,36 @@ export function track(event: AuditEvent, properties: AnalyticsProps = {}): void 
     properties: props,
   };
 
-  void fetch(ENDPOINT, {
+  const body = JSON.stringify(payload);
+  const local = isLocalHost();
+
+  // Cross-origin JSON + custom header is blocked today: OPTIONS returns 401
+  // and the API sends no Access-Control-Allow-* headers. A "simple" POST
+  // (text/plain, no custom headers) is actually delivered by the browser.
+  // Pass the key as write_key so the API can authenticate without a header.
+  const url = local
+    ? LOCAL_ENDPOINT
+    : `${REMOTE_ENDPOINT}?write_key=${encodeURIComponent(WRITE_KEY)}`;
+
+  const headers: Record<string, string> = local
+    ? {
+        accept: "application/json",
+        "Content-Type": "application/json",
+        "X-Audit-Write-Key": WRITE_KEY,
+        "X-Audit-Api-Key": WRITE_KEY,
+      }
+    : {
+        "Content-Type": "text/plain;charset=UTF-8",
+      };
+
+  void fetch(url, {
     method: "POST",
-    headers: {
-      accept: "application/json",
-      "Content-Type": "application/json",
-      "X-Audit-Write-Key": WRITE_KEY,
-    },
-    body: JSON.stringify(payload),
+    headers,
+    body,
     keepalive: true,
-    mode: "cors",
-  }).catch(() => {
-    /* fire-and-forget */
+    mode: local ? "cors" : "no-cors",
+  }).catch((error) => {
+    console.warn("[analytics] failed to send", event, error);
   });
 }
 

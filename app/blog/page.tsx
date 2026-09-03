@@ -17,11 +17,7 @@ export default function BlogIndexPage() {
     <main className="pt-32 pb-24">
       <section className="blog-index mx-auto px-5">
         <p className="blog-kicker">ReadFast Blog</p>
-        <h1 className="blog-index-title">Reading Insights and Guides</h1>
-        <p className="blog-index-lede">
-          Browse the latest articles on speed reading, comprehension, and
-          practical strategies to read with more clarity.
-        </p>
+        <h1 className="blog-index-title">Reading Insights</h1>
 
         <ul className="blog-post-list">
           {posts.map((post) => (

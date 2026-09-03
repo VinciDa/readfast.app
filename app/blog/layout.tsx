@@ -1,6 +1,7 @@
 import { Literata } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import "./blog.css";
 
 const literata = Literata({
   variable: "--font-literata",
