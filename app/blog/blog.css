@@ -170,6 +170,31 @@
   text-underline-offset: 3px;
 }
 
+/* Prose link color must not paint over CTA / store buttons (green-on-green). */
+.blog-prose a.blog-btn-primary,
+.blog-inline-callout a.blog-btn-primary {
+  color: var(--color-bg);
+  text-decoration: none;
+}
+
+.blog-prose a.blog-btn-secondary,
+.blog-inline-callout a.blog-btn-secondary {
+  color: var(--color-foreground);
+  text-decoration: none;
+}
+
+.blog-prose .blog-inline-stores a.bg-accent,
+.blog-inline-callout .blog-inline-stores a.bg-accent {
+  color: var(--color-bg);
+  text-decoration: none;
+}
+
+.blog-prose .blog-inline-stores a.text-foreground,
+.blog-inline-callout .blog-inline-stores a.text-foreground {
+  color: var(--color-foreground);
+  text-decoration: none;
+}
+
 .blog-callout {
   margin: 1.75em 0;
   padding: 0.15rem 0 0.15rem 1.2rem;
@@ -334,6 +359,7 @@
   align-items: center;
   gap: 0.75rem 1rem;
   margin-top: 1.15rem;
+  font-family: var(--font-instrument-sans), system-ui, sans-serif;
 }
 
 .blog-inline-stores {
