@@ -1,7 +1,13 @@
 import type { Metadata } from "next";
 import { Fragment } from "react";
 import ArticleShell, { ArticleCta } from "@/components/blog/ArticleShell";
+import BlogJsonLd from "@/components/blog/BlogJsonLd";
 import { getPost } from "@/lib/blog-posts";
+import {
+  buildBlogPostingJsonLd,
+  buildBreadcrumbJsonLd,
+  buildFaqPageJsonLd,
+} from "@/lib/blog-jsonld";
 
 const post = getPost("stop-regression-reading");
 
@@ -94,52 +100,17 @@ const toc = [
 ];
 
 export default function StopRegressionReadingPage() {
-  const articleJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: post.title,
-    description:
-      "Most readers backtrack dozens of times per page without realising it. Reading regression drains time and breaks flow — here's what causes it and how to stop.",
-    url: "https://readfast.app/blog/stop-regression-reading",
-    datePublished: post.date,
-    publisher: {
-      "@type": "Organization",
-      name: "ReadFast",
-      url: "https://readfast.app",
-    },
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": "https://readfast.app/blog/stop-regression-reading",
-    },
-  };
-
-  const faqJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faqs.map((faq) => ({
-      "@type": "Question",
-      name: faq.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: faq.answer,
-      },
-    })),
-  };
-
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      <BlogJsonLd
+        data={[
+          buildBlogPostingJsonLd(post),
+          buildFaqPageJsonLd(faqs),
+          buildBreadcrumbJsonLd(post),
+        ]}
       />
       <ArticleShell
-        title={post.title}
-        date={post.date}
-        readingMinutes={post.readingMinutes}
+        post={post}
         toc={toc}
         cta={
           <ArticleCta

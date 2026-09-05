@@ -1,7 +1,9 @@
 import Link from "next/link";
-import { formatPostDate } from "@/lib/blog-posts";
+import { formatPostDate, getPostLastModified, type BlogPost } from "@/lib/blog-posts";
+import RelatedPosts from "@/components/blog/RelatedPosts";
 
 export { default as ArticleCta } from "@/components/blog/ArticleCta";
+export { default as InlineCallout } from "@/components/blog/InlineCallout";
 
 export type TocItem = {
   id: string;
@@ -9,16 +11,19 @@ export type TocItem = {
 };
 
 type ArticleShellProps = {
-  title: string;
-  date: string;
-  readingMinutes: number;
+  post: BlogPost;
+  title?: string;
+  date?: string;
+  readingMinutes?: number;
   lede?: string;
   toc?: TocItem[];
   children: React.ReactNode;
   cta?: React.ReactNode;
+  showRelated?: boolean;
 };
 
 export default function ArticleShell({
+  post,
   title,
   date,
   readingMinutes,
@@ -26,7 +31,14 @@ export default function ArticleShell({
   toc,
   children,
   cta,
+  showRelated = true,
 }: ArticleShellProps) {
+  const displayTitle = title ?? post.title;
+  const displayDate = date ?? post.date;
+  const displayMinutes = readingMinutes ?? post.readingMinutes;
+  const modified = getPostLastModified(post);
+  const showUpdated = modified !== post.date;
+
   return (
     <main className="pt-32 pb-24">
       <article className="blog-article mx-auto px-5">
@@ -34,11 +46,20 @@ export default function ArticleShell({
           <p className="blog-kicker">
             <Link href="/blog">Blog</Link>
           </p>
-          <h1 className="blog-title">{title}</h1>
+          <h1 className="blog-title">{displayTitle}</h1>
           <p className="blog-meta">
-            <time dateTime={date}>{formatPostDate(date)}</time>
+            <time dateTime={displayDate}>{formatPostDate(displayDate)}</time>
+            {showUpdated ? (
+              <>
+                <span aria-hidden="true"> · </span>
+                <span>
+                  Updated{" "}
+                  <time dateTime={modified}>{formatPostDate(modified)}</time>
+                </span>
+              </>
+            ) : null}
             <span aria-hidden="true"> · </span>
-            <span>{readingMinutes} min read</span>
+            <span>{displayMinutes} min read</span>
           </p>
           {lede ? <p className="blog-lede">{lede}</p> : null}
           {toc && toc.length > 0 ? (
@@ -57,8 +78,8 @@ export default function ArticleShell({
 
         <div className="blog-prose">{children}</div>
         {cta}
+        {showRelated ? <RelatedPosts slug={post.slug} /> : null}
       </article>
     </main>
   );
 }
-

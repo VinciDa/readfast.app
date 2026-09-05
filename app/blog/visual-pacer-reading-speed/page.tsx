@@ -2,7 +2,13 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { Fragment } from "react";
 import ArticleShell, { ArticleCta } from "@/components/blog/ArticleShell";
+import BlogJsonLd from "@/components/blog/BlogJsonLd";
 import { getPost } from "@/lib/blog-posts";
+import {
+  buildBlogPostingJsonLd,
+  buildBreadcrumbJsonLd,
+  buildFaqPageJsonLd,
+} from "@/lib/blog-jsonld";
 import digitalPacerDemo from "@/res/4.jpg";
 
 const post = getPost("visual-pacer-reading-speed");
@@ -96,52 +102,17 @@ const toc = [
 ];
 
 export default function VisualPacerReadingSpeedPage() {
-  const articleJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: post.title,
-    description:
-      "A visual pacer keeps your eyes moving forward and eliminates backtracking — the reflexive habit quietly cutting your reading speed in half.",
-    url: "https://readfast.app/blog/visual-pacer-reading-speed",
-    datePublished: post.date,
-    publisher: {
-      "@type": "Organization",
-      name: "ReadFast",
-      url: "https://readfast.app",
-    },
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": "https://readfast.app/blog/visual-pacer-reading-speed",
-    },
-  };
-
-  const faqJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faqs.map((faq) => ({
-      "@type": "Question",
-      name: faq.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: faq.answer,
-      },
-    })),
-  };
-
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      <BlogJsonLd
+        data={[
+          buildBlogPostingJsonLd(post),
+          buildFaqPageJsonLd(faqs),
+          buildBreadcrumbJsonLd(post),
+        ]}
       />
       <ArticleShell
-        title={post.title}
-        date={post.date}
-        readingMinutes={post.readingMinutes}
+        post={post}
         toc={toc}
         cta={
           <ArticleCta

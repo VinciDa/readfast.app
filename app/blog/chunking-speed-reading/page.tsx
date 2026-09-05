@@ -1,7 +1,15 @@
 import type { Metadata } from "next";
 import { Fragment } from "react";
+import Link from "next/link";
 import ArticleShell, { ArticleCta } from "@/components/blog/ArticleShell";
+import BlogJsonLd from "@/components/blog/BlogJsonLd";
 import { getPost } from "@/lib/blog-posts";
+import {
+  buildBlogPostingJsonLd,
+  buildBreadcrumbJsonLd,
+  buildFaqPageJsonLd,
+  buildHowToJsonLd,
+} from "@/lib/blog-jsonld";
 
 const post = getPost("chunking-speed-reading");
 
@@ -94,52 +102,35 @@ const toc = [
 ];
 
 export default function ChunkingSpeedReadingPage() {
-  const articleJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: post.title,
-    description:
-      "Your eyes can capture multiple words in a single glance. Chunking trains you to use that ability — fewer stops per line, faster reading, comprehension intact.",
-    url: "https://readfast.app/blog/chunking-speed-reading",
-    datePublished: post.date,
-    publisher: {
-      "@type": "Organization",
-      name: "ReadFast",
-      url: "https://readfast.app",
-    },
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": "https://readfast.app/blog/chunking-speed-reading",
-    },
-  };
-
-  const faqJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faqs.map((faq) => ({
-      "@type": "Question",
-      name: faq.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: faq.answer,
-      },
-    })),
-  };
-
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      <BlogJsonLd
+        data={[
+          buildBlogPostingJsonLd(post),
+          buildFaqPageJsonLd(faqs),
+          buildBreadcrumbJsonLd(post),
+          buildHowToJsonLd(
+            "How to start chunking while reading",
+            "Train your eyes to read word groups instead of one word at a time.",
+            [
+              {
+                name: "Start with two-word pairs",
+                text: "Group words into pairs as you read to widen your fixation window.",
+              },
+              {
+                name: "Expand to three-word clusters",
+                text: "Move to three-word phrases that map onto natural meaning units.",
+              },
+              {
+                name: "Use natural phrase chunks",
+                text: "Let chunk size follow the structure of the text rather than a fixed count.",
+              },
+            ],
+          ),
+        ]}
       />
       <ArticleShell
-        title={post.title}
-        date={post.date}
-        readingMinutes={post.readingMinutes}
+        post={post}
         toc={toc}
         cta={
           <ArticleCta
@@ -150,11 +141,10 @@ export default function ChunkingSpeedReadingPage() {
             secondaryLabel="Download ReadFast Free"
           >
             <p>
-              ReadFast&apos;s Bionic Reading mode bolds the first letters of
-              each word, giving your eyes a natural anchor to group words into
-              phrases without effort. Take the free reading speed test to find
-              your baseline, then open the app and feel what phrase-level
-              reading actually looks like.
+              Measure your baseline first, then practice phrase-level reading
+              with ReadFast&apos;s RSVP and adjustable pacing. Controlled speed
+              pushes your eyes to take in groups of words instead of stopping on
+              every single one.
             </p>
           </ArticleCta>
         }
@@ -354,29 +344,24 @@ export default function ChunkingSpeedReadingPage() {
           automatic and slipping back to single-word reading is easy.
         </p>
         <p>
-          ReadFast shortens this learning curve with two features that directly
-          support chunking. <strong>Bionic Reading mode</strong> bolds the
-          opening letters of each word, giving your eyes a fast-recognition
-          anchor so you can sweep across a phrase in one glance without
-          each word demanding its own processing time. The first letters do
-          the heavy lifting; your brain fills in the rest automatically,
-          which is exactly the mechanism chunking relies on.
+          ReadFast shortens the learning curve with{" "}
+          <Link href="/blog/what-is-rsvp-reading">RSVP reading</Link> and
+          adjustable pacing. When words arrive slightly faster than your
+          comfort zone, one-word-at-a-time reading becomes unsustainable — so
+          your visual system starts grabbing phrases instead. That is the same
+          principle professional speed-reading courses use, applied to PDFs,
+          articles, and books you already need to finish.
         </p>
         <p>
-          Pair that with ReadFast&rsquo;s adjustable reading speed and you get
-          a controlled training environment: push the pace slightly above your
-          comfort zone and your brain has no choice but to start reading in
-          groups rather than individual words — because individual words at
-          speed become unsustainable. This is the same principle professional
-          speed-reading courses use, delivered in an app you can open on any
-          PDF, article, or book you&rsquo;re already reading.
-        </p>
-        <p>
-          The practical result is that the chunking habit most people take
-          weeks to build manually tends to feel natural in ReadFast within
-          a few sessions — not because the app does it for you, but because
-          the environment makes the right behaviour the path of least
-          resistance.
+          Optional display modes (including Bionic-style bolding) are available
+          if you personally find them helpful, but the core training effect
+          comes from paced, forward-moving reading — not from any single font
+          trick. For the evidence on Bionic Reading specifically, see our
+          honest review of{" "}
+          <Link href="/blog/does-bionic-reading-work">
+            whether Bionic Reading works
+          </Link>
+          .
         </p>
 
         <h2 id="faq">FAQ</h2>

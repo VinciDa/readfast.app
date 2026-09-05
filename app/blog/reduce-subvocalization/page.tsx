@@ -1,7 +1,13 @@
 import type { Metadata } from "next";
 import { Fragment } from "react";
 import ArticleShell, { ArticleCta } from "@/components/blog/ArticleShell";
+import BlogJsonLd from "@/components/blog/BlogJsonLd";
 import { getPost } from "@/lib/blog-posts";
+import {
+  buildBlogPostingJsonLd,
+  buildBreadcrumbJsonLd,
+  buildFaqPageJsonLd,
+} from "@/lib/blog-jsonld";
 
 const post = getPost("reduce-subvocalization");
 
@@ -87,66 +93,32 @@ const toc = [
 ];
 
 export default function ReduceSubvocalizationPage() {
-  const articleJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: post.title,
-    description:
-      "Your inner voice is capping your reading speed at talking pace. Learn what subvocalization actually is, why the internet argues about it, and five field-tested ways to quiet it.",
-    url: "https://readfast.app/blog/reduce-subvocalization",
-    datePublished: post.date,
-    publisher: {
-      "@type": "Organization",
-      name: "ReadFast",
-      url: "https://readfast.app",
-    },
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": "https://readfast.app/blog/reduce-subvocalization",
-    },
-  };
-
-  const faqJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faqs.map((faq) => ({
-      "@type": "Question",
-      name: faq.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: faq.answer,
-      },
-    })),
-  };
-
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      <BlogJsonLd
+        data={[
+          buildBlogPostingJsonLd(post),
+          buildFaqPageJsonLd(faqs),
+          buildBreadcrumbJsonLd(post),
+        ]}
       />
       <ArticleShell
-        title={post.title}
-        date={post.date}
-        readingMinutes={post.readingMinutes}
+        post={post}
         toc={toc}
         cta={
           <ArticleCta
             title="Turn the volume down, not off"
             primaryHref="/reading-speed-test"
-            primaryLabel="Take the Reading Speed Test"
-            secondaryHref="/blog"
-            secondaryLabel="Back to Blog"
+            primaryLabel="Test Your Reading Speed"
+            secondaryHref="/"
+            secondaryLabel="Download ReadFast Free"
           >
             <p>
               The inner voice isn&apos;t your enemy. It&apos;s just been running
               the show longer than it needs to. Quiet it on familiar material,
               keep it for dense text — and watch your reading speed catch up to
-              your thinking speed.
+              your thinking speed. Measure your baseline, then train with
+              ReadFast&apos;s paced reading.
             </p>
           </ArticleCta>
         }
